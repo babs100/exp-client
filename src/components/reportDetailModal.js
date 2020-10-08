@@ -1,14 +1,8 @@
-import Link from "next/link";
 import { userActions } from "../actions";
 import { connect } from "react-redux";
-import { useForm } from "react-hook-form";
-import { pattern, errorMessage } from '../constants';
-import {  closeModal } from "../utils/functions";
 
-import Papa from "papaparse"
-import { useState } from "react";
 
-const ReportDetailModal = ({children, pageProps,selectedReport,selectedUser}) => {
+const ReportDetailModal = ({selectedReport,selectedUser}) => {
     
     //console.log(selectedReport)
     
