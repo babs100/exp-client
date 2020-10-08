@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var pattern = {};","map":{"version":3,"sources":["/Users/babatundeolajide/Projects/ExpressGrub/AdminClient/src/constants/pattern.constants.js"],"names":["pattern"],"mappings":"AAAA,OAAO,IAAMA,OAAO,GAAG,EAAhB","sourcesContent":["export const pattern = {\n    \n}"]},"metadata":{},"sourceType":"module"}

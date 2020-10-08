@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const regEx = {};","map":{"version":3,"sources":["/Users/babatundeolajide/Projects/ExpressGrub/AdminClient/src/constants/regex.constants.js"],"names":["regEx"],"mappings":"AAAA,OAAO,MAAMA,KAAK,GAAG,EAAd","sourcesContent":["export const regEx = {\n    \n}"]},"metadata":{},"sourceType":"module"}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const Reg = {};","map":{"version":3,"sources":["/Users/babatundeolajide/Projects/ExpressGrub/AdminClient/src/constants/pattern.constants.js"],"names":["Reg"],"mappings":"AAAA,OAAO,MAAMA,GAAG,GAAG,EAAZ","sourcesContent":["export const Reg = {\n\n}"]},"metadata":{},"sourceType":"module"}
