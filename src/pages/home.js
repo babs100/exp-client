@@ -9,7 +9,7 @@ import UploadReportModal from '../components/uploadReportModal';
 import UpdateUserModal from '../components/updateUserModal';
 import ReportDetailModal from '../components/reportDetailModal';
 
-function AdminPage({admin, loading,loadingError , error,allUsers, filteredUsers, getAllUsers, searchUser, selectUser, selectedUser, resetFilter}) {
+function AdminPage({admin, uploadImage, loading,loadingError , error,allUsers, filteredUsers, getAllUsers, searchUser, selectUser, selectedUser, resetFilter}) {
   
   useEffect(() => {
       getAllUsers()
@@ -20,6 +20,36 @@ function AdminPage({admin, loading,loadingError , error,allUsers, filteredUsers,
     query:""
   }))
 
+  //Open Image upload widget
+  const openWidget = () => {
+    // create the widget
+    window.cloudinary.createUploadWidget(
+      {
+        cloudName: 'babs100',
+        uploadPreset: 'wc1fw4yp',
+        sources: ['local', 'camera', 'dropbox', 'google_drive']
+      },
+      (error, result) => {
+        if (result && result.info && result.info.secure_url){
+          const imageDetails = {
+            url: result.info.secure_url
+          }
+  
+          const data = {
+            userId: selectedUser.id,
+            data: imageDetails
+          }
+          
+          uploadImage(data)
+        }
+        
+        // this.setState({
+        //   imageUrl: result.info.secure_url,
+        //   imageAlt: `An image of ${result.info.original_filename}`
+        // })
+      },
+    ).open(); // open up the widget after creation
+  };
   
   
   const onSearchTextChange = (e) => {
@@ -46,6 +76,13 @@ function AdminPage({admin, loading,loadingError , error,allUsers, filteredUsers,
     searchUser(searchFormData.query)
     
     return false
+  }
+
+  let userImage = ""
+  if(selectedUser && selectedUser.imageURL){
+   userImage =  selectedUser.imageURL.replace(/(v[0-9]+)/g, 'w_100,h_100,c_thumb')
+  } else{
+    userImage =  "/img/placeholder.png"
   }
 
   const trClicked = (id) => {
@@ -152,8 +189,10 @@ function AdminPage({admin, loading,loadingError , error,allUsers, filteredUsers,
         <div style={{position:"relative"}} className="pure-u-6-24 padded">
         {selectedUser && 
           <div className="container bordered padded">
-            <div className="center-content" style={{height:"100px", width:"100%", backgroundColor:"#d1d1d1",  justifyContent:'center', alignItems:"center"}}>
-                <img src="/img/placeholder.png" style={{width:"80px", height:"80px", borderRadius:"40px"}}  />
+             <div id="imageHandle" className="center-content" style={{ position:"relative", height:"100px", width:"100%", backgroundColor:"#d1d1d1",  justifyContent:'center', alignItems:"center"}}>
+                <img  id="imageTag" src={userImage} style={{width:"80px", height:"80px", borderRadius:"40px", border:"1px solid #f8f8f8"}}  />
+                
+            <button onClick={openWidget} className="my-button" style={{backgroundColor:"transparent", fontSize:".7em", position:"absolute", left:"2px", bottom:"2px", border:'none'}}>click to edit Image</button>
             </div>
             <hr className="divider"/>
             <div className="user-detail">
@@ -172,7 +211,7 @@ function AdminPage({admin, loading,loadingError , error,allUsers, filteredUsers,
                                 <a href="#" id="myBtn" data-type="show-modal" data-target="uploadReportModal" className="pure-menu-link">Add Report</a>
                             </li>
                             <li className="pure-menu-item">
-                            <a href="#" id="myBtn" data-type="show-modal" data-target="reportDetailModal" className="pure-menu-link">Show Reports</a>
+                            <a href="#"  id="myBtn" data-type="show-modal" data-target="reportDetailModal" className="pure-menu-link">Show Reports</a>
                             </li>
                             <li className="pure-menu-item">
                             <a href="#" id="myBtn3" data-type="show-modal" data-target="updateUserModal" className="pure-menu-link">Update User</a>
@@ -242,6 +281,7 @@ const mapDispatchToProps = {
   selectUser: userActions.selectUser,
   searchUser: userActions.searchUser,
   resetFilter: userActions.resetFilter,
+  uploadImage: userActions.uploadImage,
   
 };
 

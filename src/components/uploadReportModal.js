@@ -13,7 +13,7 @@ const UploadReportModal = ({children, pageProps,uploadReport,uploading, uploadRe
     
     const [fileError, setFileError] = useState("")
 
-    const processData = (headers, body ) => {
+    const processData = (headers, body, year ) => {
         //console.log(headers)
         //console.log(body)
         const requestBody = {}
@@ -63,6 +63,7 @@ const UploadReportModal = ({children, pageProps,uploadReport,uploading, uploadRe
 
         requestBody["userId"] = selectedUser.id
         requestBody["data"] = jsonData
+        requestBody["year"] = year
         
         return requestBody
     }
@@ -70,6 +71,7 @@ const UploadReportModal = ({children, pageProps,uploadReport,uploading, uploadRe
     const onSubmit = formData => {
         
         const file = formData.selectedFile[0]
+        const year = formData.year
 
  
         try {
@@ -81,7 +83,11 @@ const UploadReportModal = ({children, pageProps,uploadReport,uploading, uploadRe
                 complete: result => {
                     if (result.errors.length != 0)
                         throw Error(JSON.stringify(result.errors))
-                    const body = processData(result.meta.fields, result.data)
+                    const body = processData(result.meta.fields, result.data, year)
+                    
+                    
+                    
+
                     uploadReport(body)
                     reset()
                     //loseModal("uploadReportModal")
@@ -137,6 +143,7 @@ const UploadReportModal = ({children, pageProps,uploadReport,uploading, uploadRe
                             <ul>
                                 
                                 {errors.selectedFile && <li> {errors.selectedFile.message} </li> }
+                                {errors.year && <li> {errors.year.message} </li> }
                                 
                             </ul>
                             
@@ -165,6 +172,27 @@ const UploadReportModal = ({children, pageProps,uploadReport,uploading, uploadRe
                               }
                       })} />
                   </div>
+                  <br/>
+
+                  <div className="pure-control-group">
+                      <label htmlFor="year">Select Year</label>
+                      <select required={true} id="year" name="year" ref={register({required:"Please Select Year"})}>
+                            <option value="">Year</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                            
+                        </select>
+                      
+                  </div>
+
                   <br/>
                   
                   <div className="pure-controls">

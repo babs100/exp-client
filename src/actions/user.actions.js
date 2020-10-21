@@ -10,6 +10,8 @@ export const userActions = {
     searchUser,
     resetFilter,
     uploadReport,
+    uploadImage,
+    fetchReport,
     delete: _delete
 };
 
@@ -107,6 +109,29 @@ function selectUser(userId) {
     
 }
 
+function fetchReport() {
+    return (dispatch, getState) => {
+        dispatch(request());
+        const userId = getState().users.selectedUser.id
+        const token = getState().authentication.token
+
+        console.log('called fetch report')
+        const data = {userId}
+        userService.getUserReport(data, token)
+            .then(
+                
+                result => dispatch(success(result.data.report)),
+                error => dispatch(failure(error.toString()))
+            );
+        
+    };
+
+    function request() { return { type: userConstants.USER_REPORT_REQUEST } }
+    function success(report) { return { type: userConstants.USER_REPORT_SUCCESS, report } }
+    function failure(error) { return { type: userConstants.USER_REPORT_FAILURE, error } }
+    
+}
+
 function resetFilter() {
     return (dispatch, getState) => {
         const users = getState().users.allUsers
@@ -185,6 +210,33 @@ function uploadReport(data) {
     function request() { return { type: userConstants.REPORT_UPLOAD_REQUEST} }
     function success(data) { return { type: userConstants.REPORT_UPLOAD_SUCCESS, data } }
     function failure(error) { return { type: userConstants.REPORT_UPLOAD_FAILURE, error } }
+}
+
+function uploadImage(data) {
+    return (dispatch, getState) => {
+        const {token} = getState().authentication;
+        dispatch(request());
+
+        userService.uploadImage(data, token)
+            
+            .then(
+                result => { 
+                    
+        
+                    dispatch(success())
+                    dispatch(updateUserInStore(result.data.user))
+                    
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                }
+            );
+    };
+
+    function request() { return { type: userConstants.IMAGE_UPLOAD_REQUEST} }
+    function success() { return { type: userConstants.IMAGE_UPLOAD_SUCCESS} }
+    function updateUserInStore(user) { return { type: userConstants.UPDATE_USER_IN_STORE, user } }
+    function failure(error) { return { type: userConstants.IMAGE_UPLOAD_FAILURE, error } }
 }
 
 

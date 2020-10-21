@@ -44,6 +44,7 @@
             return toggleAll(e);
         }
 
+
         if(e.target.dataset.type === "show-modal"){
             //console.log("the target is " + e.target.dataset.target)
             modal   = document.getElementById(e.target.dataset.target);

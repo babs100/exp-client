@@ -339,7 +339,9 @@ input.error {
   font-size: .9rem;
 
 }
-
+.my-button:hover{
+  cursor: pointer;
+}
 .button-loader {
   margin-right: 4px;
   width: 14px;

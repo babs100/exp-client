@@ -37,7 +37,10 @@ function MyApp({ Component, pageProps, reduxStore, persistor }) {
         </Layout>
       </PersistGate>
     </Provider>
-      
+      <script
+        src="https://widget.Cloudinary.com/v2.0/global/all.js"
+        type="text/javascript"
+      />
       <script type="text/javascript" src="/js/menu.js" />
       <script type="text/javascript" src="/js/grid.js" />
       <script defer type="text/javascript" src="/js/ui.js" />

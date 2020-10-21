@@ -50,6 +50,17 @@ export default class UserService {
         })
     }
 
+    uploadImage(data, token) {
+        return this.fetch(routeConstants.UPLOAD_IMAGE, {
+            method: 'POST',
+            body: JSON.stringify(data)
+        },
+        token
+        ).then(res => {
+            return Promise.resolve(res)
+        })
+    }
+
 
     getAllUser(token) {
         return this.fetch(routeConstants.ALL_USER, {

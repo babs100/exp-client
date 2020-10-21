@@ -2,7 +2,7 @@ import { userActions } from "../actions";
 import { connect } from "react-redux";
 
 
-const ReportDetailModal = ({selectedReport,selectedUser}) => {
+const ReportDetailModal = ({selectedReport,selectedUser,fetchingReport}) => {
     
     //console.log(selectedReport)
     
@@ -13,7 +13,14 @@ const ReportDetailModal = ({selectedReport,selectedUser}) => {
             {selectedUser && <h3>Report detail for <span className="blue">{selectedUser.firstName + " " + selectedUser.lastName}</span></h3> }
             <hr className="divider"/>
             <div className="card-container">
-                {selectedReport && selectedReport.reports.map((report, i) => (
+                {fetchingReport && <div style={{textAlign:'center'}}> <span>...loading</span></div>}
+                {!fetchingReport && selectedReport &&selectedReport.total && <div style={{textAlign:'center'}}>
+                        <p>Dispatched Packages <br/> <strong>{selectedReport.total.Dispatched_Packages}</strong> </p>
+                        <p>Delivered Packages <br/> <strong>{selectedReport.total.Delivered_Packages}</strong> </p>
+                        <p>Delivery Success (%) <br/> <strong>{selectedReport.total.Delivery_Success_P}</strong> </p>
+                        <p>Count <br/> <strong>{selectedReport.all[0].weekReports.length}</strong> </p>
+                     </div>}
+                {!fetchingReport && selectedReport && selectedReport.reports && selectedReport.reports.map((report, i) => (
                     <div key={i} className="card">
                         <p>Week <br/> <strong>{report.Week_Number}</strong> </p>
                         <p>Uploaded On <br/> <strong>{report.createdAt}</strong> </p>
@@ -24,7 +31,7 @@ const ReportDetailModal = ({selectedReport,selectedUser}) => {
                 ))
 
                 }
-                {selectedReport && selectedReport.reports.length == 0 && <p>No report found</p>}
+                {selectedReport && selectedReport.reports && selectedReport.reports.length == 0 && <p>No report found</p>}
             </div>
           
             
@@ -36,6 +43,8 @@ const ReportDetailModal = ({selectedReport,selectedUser}) => {
 const mapStateToProps = state => ({
     selectedUser: state.users.selectedUser,
     selectedReport: state.users.selectedReport,
+    fetchingReport: state.users.fetchingReport,
+
   });
 
 const mapDispatchToProps = {

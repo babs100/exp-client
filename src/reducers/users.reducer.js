@@ -35,9 +35,15 @@ export function users(state = {}, action) {
       };
     
     case userConstants.GETALL_SUCCESS:
+      let sel = state.selectedUser
+      if (action.users.length < 1){
+        sel = null
+      }
+      
       return {
         ...state,
         allUsers: action.users,
+        selectedUser: sel,
         filteredUsers: action.users,
         loading: false,
         loadingError:false,
@@ -93,14 +99,14 @@ export function users(state = {}, action) {
     case userConstants.USER_REPORT_REQUEST:
       return {
         ...state,
-        uploading:true,
+        fetchingReport:true,
         reportRequestSuccess:false,
         reportRequestError:""
       };
     case userConstants.USER_REPORT_SUCCESS:
       return {
         ...state,
-        uploading:false,
+        fetchingReport:false,
         reportRequestSuccess:true,
         reportRequestError:"",
         selectedReport: action.report
@@ -108,10 +114,31 @@ export function users(state = {}, action) {
     case userConstants.USER_REPORT_FAILURE:
       return {
         ...state,
-        uploading:false,
+        fetchingReport:false,
         reportRequestSuccess:false,
         reportRequestError:action.error,
         selectedReport: null
+      };
+    case userConstants.IMAGE_UPLOAD_REQUEST:
+      return {
+        ...state,
+        uploadingImage:true,
+        imageRequestSuccess:false,
+        imageRequestError:""
+      };
+    case userConstants.IMAGE_UPLOAD_SUCCESS:
+      return {
+        ...state,
+        uploadingImage:false,
+        imageRequestSuccess:true,
+        imageRequestError:"",
+      };
+    case userConstants.IMAGE_UPLOAD_FAILURE:
+      return {
+        ...state,
+        uploadingImage:false,
+        imageRequestSuccess:false,
+        imageRequestError:action.error,
       };
 
     case userConstants.UPDATE_USER_IN_STORE:
@@ -141,6 +168,7 @@ export function users(state = {}, action) {
     case userConstants.REPORT_UPLOAD_REQUEST:
       return {
         ...state,
+        uploading:true,
         uploadReportSuccess: false,
         uploadReportError: "",
       }
@@ -169,12 +197,14 @@ export function users(state = {}, action) {
         selectedReport:action.data.report,
         filteredUsers: ftdUsers,
         allUsers: all,
+        uploading:false,
         uploadReportSuccess: true,
         uploadReportError: "",
       }
     case userConstants.REPORT_UPLOAD_FAILURE:
       return {
         ...state,
+        uploading:false,
         uploadReportSuccess: false,
         uploadReportError: action.error,
       }
