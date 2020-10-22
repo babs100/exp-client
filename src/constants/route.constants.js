@@ -4,8 +4,7 @@ const local = "http://localhost:4000"
 const remote = "https://exp-server.azurewebsites.net"
 
 
-let domain = process.env.API_HOST
-
+let domain = process.env.NEXT_PUBLIC_API_HOST
 export const routeConstants = {
     ADMIN_LOGIN : `${domain}/api/v1/man/login`,
     ADMIN_PROFILE : `${domain}/api/v1/man/profile`,

@@ -5,7 +5,6 @@ import "dotenv/config";
 const PORT = parseInt(process.env.PORT);
 const HOST = process.env.HOST 
 
-console.log(HOST)
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
 const handle = app.getRequestHandler();

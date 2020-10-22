@@ -1,7 +1,8 @@
 import crypto from "crypto";
 
 const algorithm = 'aes-256-ctr';
-const secretKey = 'vOJKVH6sdmpNWjRRIqCc7rdxs01lwHzf';
+const secretKey = process.env.NEXT_PUBLIC_ACCESS_TOKEN_ENC_KEY;
+
 const iv = crypto.randomBytes(16);
 
 const encrypt = (text) => {
