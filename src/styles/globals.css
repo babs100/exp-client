@@ -155,7 +155,28 @@ th {
   overflow-y: scroll;
   max-height:450px;
 }
-
+.report-container {
+  max-height:400px;
+  overflow-y: scroll;
+}
+.report-container > div:nth-of-type(odd) {
+  background-color: #f0eaea;
+}
+/* .report-main > div {
+  display: inline-block;
+  margin-right: 10px;
+} */
+.report-main {
+  display: flex;
+  flex-flow: nowrap;
+  flex-direction: row;
+}
+div.report-part{
+  border-right: #aaa;
+  font-size: 0.8em;
+  flex-grow: 1;
+  padding: 0px 5px;
+}
 .card-container { 
   display: flex; 
   flex-flow: wrap;
@@ -174,10 +195,39 @@ th {
   border-radius: 5px;
 }
 
+.small-card {
+  /*flex: 1 0 31%; */
+  flex: 1 0 23%;
+  flex-grow: 0;
+  margin: 0.9%;
+  background-color: #d1d1d1;
+  padding: 5px 8px;
+  font-size: 0.8em;
+  border-radius: 5px;
+}
+
 .card:last-of-type {
   flex-grow: 0;
 }
-
+.plain-button:hover {
+  cursor: pointer;
+}
+.plain-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+.weeks-detail {
+  display: none;
+}
+.show-flex {
+  display: flex;
+}
+.plain-button {
+  background-color: transparent;
+  text-decoration: none;
+  border: none;
+  font-size: 1em;
+}
 .user-detail {
   font-size: 0.8em;
   padding-left: 10px;
@@ -301,14 +351,19 @@ input.error {
   /*background-color: #fefefe;*/
   background-color: #F7F8FA;
   margin: 5% auto auto; /* 7% from the top and centered */
-  padding: 20px;
+  padding: 0px;
   border: 1px solid #888;
   width: auto;
-  max-width: 60%; /* Could be more or less, depending on screen size */ 
+  /*max-width: 60%; /* Could be more or less, depending on screen size */ 
   box-shadow: 0 3px 3px rgba(0,0,0,0.2);
   border-radius: 7px;
 }
-
+.modal-title {
+  font-size: 1.1em;
+}
+.modal-header, .modal-detail {
+  padding: 15px 20px;
+}
 /* The Close Button */
 .close {
   color: #aaa;

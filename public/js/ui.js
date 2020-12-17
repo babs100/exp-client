@@ -55,6 +55,19 @@
             modal   = document.getElementById(e.target.dataset.target);
             modal.style.display = "none";
         }
+
+        if(e.target.dataset.type === "toggle-detail"){
+            div   = document.getElementById(e.target.dataset.target);
+            //modal.style.display = "none";
+            e.preventDefault()
+            let show = "show-flex";
+            toggleClass(div, show)
+            if(e.target.innerHTML == "click to show weeks"){
+                e.target.innerHTML = "click to hide weeks"
+            } else {
+                e.target.innerHTML = "click to show weeks"
+            }
+        }
         
         if (menu.className.indexOf('active') !== -1) {
             return toggleAll(e);

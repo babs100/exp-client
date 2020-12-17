@@ -29,10 +29,13 @@ const UpdateUserModal = ({children, pageProps,updatingUser, updateUserError,erro
     return <div id="updateUserModal" className="modal">
          
         <div className="modal-content" style={{width:"50%"}}>
-            <span className="close" data-type="hide-modal" data-target="updateUserModal">&times;</span>
-            <h3>Update User</h3>
+            <div className="modal-header">
+              <span className="close" data-type="hide-modal" data-target="updateUserModal">&times;</span>
+              <span className="modal-title">Update User</span>  
+            </div>
             <hr className="divider"/>
-            
+            <div className="modal-detail">
+
             { updateUserError && <div className="panel code error-msg">
                   <ul>
                     <li> {error}</li>    
@@ -115,6 +118,12 @@ const UpdateUserModal = ({children, pageProps,updatingUser, updateUserError,erro
                 </fieldset>
               </form>
              }
+
+            </div>
+            
+            
+            
+            
             
         </div>
     </div>

@@ -19,10 +19,14 @@ const NewUserModal = ({children, pageProps,addingUser,addUserError,error,addUser
     }
     return <div id="myModal" className="modal">
          
-        <div className="modal-content">
-            <span className="close" data-type="hide-modal" data-target="myModal">&times;</span>
-            <h3>New User</h3>
+        <div className="modal-content" style={{width:"45%"}}>
+            <div className="modal-header">
+                <span className="close" data-type="hide-modal" data-target="myModal">&times;</span>
+                <span className="modal-title">New User</span>
+            </div>
             <hr className="divider"/>
+
+            <div className="modal-detail">
             {lastAdded && addUserSuccess && (Object.keys(errors).length == 0) && <div className="panel code">
             <h4 className="success"> LAST RECORD: {lastAdded.firstName + " " + lastAdded.lastName}</h4>
                 </div>
@@ -98,6 +102,9 @@ const NewUserModal = ({children, pageProps,addingUser,addUserError,error,addUser
                   </div>
                 </fieldset>
               </form>
+            </div>
+            
+            
           
             
         </div>

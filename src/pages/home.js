@@ -192,7 +192,7 @@ function AdminPage({admin, uploadImage, loading,loadingError , error,allUsers, f
              <div id="imageHandle" className="center-content" style={{ position:"relative", height:"100px", width:"100%", backgroundColor:"#d1d1d1",  justifyContent:'center', alignItems:"center"}}>
                 <img  id="imageTag" src={userImage} style={{width:"80px", height:"80px", borderRadius:"40px", border:"1px solid #f8f8f8"}}  />
                 
-            <button onClick={openWidget} className="my-button" style={{backgroundColor:"transparent", fontSize:".7em", position:"absolute", left:"2px", bottom:"2px", border:'none'}}>click to edit Image</button>
+            <button onClick={openWidget} className="plain-button" style={{backgroundColor:"transparent", fontSize:".7em", position:"absolute", left:"2px", bottom:"2px", border:'none'}}>click to edit Image</button>
             </div>
             <hr className="divider"/>
             <div className="user-detail">

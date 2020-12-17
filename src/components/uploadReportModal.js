@@ -107,10 +107,13 @@ const UploadReportModal = ({children, pageProps,uploadReport,uploading, uploadRe
     return <div id="uploadReportModal" className="modal">
          
         <div className="modal-content" style={{width:"45%"}}>
-            <span className="close" data-type="hide-modal" data-target="uploadReportModal">&times;</span>
-            {selectedUser && <h3>Upload a report for <span className="blue">{selectedUser.firstName + " " + selectedUser.lastName}</span></h3> }
+            <div className="modal-header"> 
+                <span className="close" data-type="hide-modal" data-target="uploadReportModal">&times;</span>
+                {selectedUser && <span className="modal-title">Upload a report for <span className="blue">{selectedUser.firstName + " " + selectedUser.lastName}</span></span> }
+            </div>
             <hr className="divider"/>
-            
+            <div className="modal-detail"> 
+
             { uploadReportError && uploadReportError.length > 0 && <div className="panel code error-msg">
                   <ul>
                     <li> {uploadReportError}</li>    
@@ -203,6 +206,12 @@ const UploadReportModal = ({children, pageProps,uploadReport,uploading, uploadRe
                   </div>
                 </fieldset>
               </form>
+
+            </div>
+            
+            
+            
+            
           
             
         </div>
